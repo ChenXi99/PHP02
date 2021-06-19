@@ -1,0 +1,17 @@
+
+.wrap{
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    align-items: center;
+}
+
+.wrap1,
+.wrap2{
+    padding: 20px;
+}
+
+.t{
+    text-align: center;
+    background-color:#FFFF99;
+}

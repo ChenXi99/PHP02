@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="./17_chen_map.css">   
+<title>🍺 My Craft Beer Map 🍺</title>
+<nav style="padding: 20px 0 0 20px;">
+<a style="color: white;" href="../php02_chen/select_kadai.php">Database</a>
+</nav>
+<style>html,body{height:100%;}body{padding:0;margin:0;}h1{padding:0;margin:0;font-size:50%;}</style>
+</head>
+<body>
+
+<h1 class="title">🍺 My Craft Beer Map 🍺</h1>
+
+<form method="POST" action="../php02_chen/insert_kadai.php">
+    <div class="optionMemo">
+            <p>Name</p><input type="text" name="name" id="name">
+            <p>Rate</p><select name="rate" id="name">
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+            </select>
+            <!-- <p>Rate</p><input type="text" id="rate"> -->
+            <p>Memo</p><textarea name="memo" id="memo" cols="40" rows="2"></textarea>
+            <p style="font-size: 20px;">📷</p><input type="text" id="pic">
+            <p>Address</p><input type="text" name="address" id="address">
+            <p>URL</p><input type="text" name="URL" id="URL">
+            <button type="submit" id="enter">Enter</button>
+    </div>
+</form>
+
+<!-- MAP[START] -->
+<div id="myMap" style='width:76%;height:70%;float:left;'></div>
+<!-- MAP[END] -->
+
+<script src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=An-CmDLnQjfvm8YFIeIQGQ-k0MGOmr7R_31GGUPQhV7zOS7PomC3mFufl4Rr8JG-' async defer></script>
+<script src="./js/BmapQuery.js"></script>
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+//   var firebaseConfig = {
+//     apiKey: "AIzaSyD2uDTbt7sMGwZJCnbDuue8v2EkUlxpqIU",
+//     authDomain: "my-craft-beer-map.firebaseapp.com",
+//     projectId: "my-craft-beer-map",
+//     storageBucket: "my-craft-beer-map.appspot.com",
+//     messagingSenderId: "975441554961",
+//     appId: "1:975441554961:web:87644082101cc4e46d8bb0"
+//   };
+//   // Initialize Firebase
+//   firebase.initializeApp(firebaseConfig);
+
+//   const options = firebase.database().ref();
+
+  const options = [];
+        
+        options[0]={
+            "lat":35.65546478467251,
+            "lon":139.79263449745912,
+            "title":"ベル･オーブ ららぽーと豊洲",
+            // "pinColor":"#ff0000",
+            "height":300,
+            "width":300,
+            "description": 'シカゴピザ、テラス席。夏の夜は最高！<br><img src="./img/bel.jpg" width="240">',
+            "show":false
+        };
+        options[1]={
+            "lat":35.675801702849185,
+            "lon":139.76736848213727,
+            "title":"CRAFT BEER BAR IBREW 銀座",
+            // "pinColor":"#00ff00",
+            "height":300,
+            "width":300,
+            "description": '日替わり10種、飲み放題コースお得！<br><img src="./img/ibrew.jpg" width="240">',
+            "show":false
+        };
+        options[2]={
+            "lat":35.68993212894646,
+            "lon":139.78261354165898,
+            "title":"日本橋 ブルワリー",
+            // "pinColor":"#ff0000",
+            "height":300,
+            "width":300,
+            "description": '升で飲む。意外とイケる。<br><img src="./img/nihon.jpg" width="240">',
+            "show":false
+        };
+        options[3]={
+            "lat":35.65967047695413,
+            "lon":139.6960658821346,
+            "title":"Mikkeller Tokyo",
+            // "pinColor":"#ff0000",
+            "height":300,
+            "width":300,
+            "description": 'デンマーク発、おしゃれ！外国人率高。<br><img src="./img/mikkeller.jpg" width="240">',
+            "show":false
+        };
+        options[4]={
+            "lat":35.67725276909145,
+            "lon":139.73746195329926,
+            "title":"YONA YONA BEER WORKS 赤坂",
+            // "pinColor":"#ff0000",
+            "height":300,
+            "width":300,
+            "description": 'ローストチキンも旨い。<br>開放的、スポーツ観戦できる！<br><img src="./img/yona.jpg" width="240">',
+            "show":false
+        };
+        options[5]={
+            "lat":35.64998250752228,
+            "lon":139.70469189562706,
+            "title":"Spring Valley Brewery Tokyo",
+            // "pinColor":"#ff0000",
+            "height":300,
+            "width":300,
+            "description": '飲み比べセットが楽しい♩<br>店員は親切で説明上手。<br><img src="./img/svb.jpg" width="240">',
+            "show":false
+        };
+        options[6]={
+            "lat":35.62315048689568,
+            "lon":139.74736125514798,
+            "title":"T.Y.HARBOR",
+            // "pinColor":"#ff0000",
+            "height":300,
+            "width":300,
+            "description": '運河を眺めながら、ゆったり過ごせる。<br>夜はとても幻想的！<br><img src="./img/ty.jpg" width="240">',
+            "show":false
+        };
+        options[7]={
+            "lat":35.693704775192934, 
+            "lon":139.77007089760443,
+            "title":"KARAKURI",
+            // "pinColor":"#ff0000",
+            "height":300,
+            "width":300,
+            "description": 'おでんやお酒も充実！カウンター席が◎。<br><img src="./img/karakuri.jpg" width="240">',
+            "show":false
+        };
+        options[8]={
+            "lat":35.6829892009477,
+            "lon":139.77806276876888,
+            "title":"B by Brooklyn Brewery",
+            // "pinColor":"#ff0000",
+            "height":300,
+            "width":300,
+            "description": 'タコスが旨い。<br>照明は暗めでライブある時はGood!<br><img src="./img/brooklyn.jpg" width="240">',
+            "show":false
+        };
+        options[9]={
+            "lat":35.701900642965995,
+            "lon":139.74070296876934,
+            "title":"神楽坂ラ・カシェット",
+            // "pinColor":"#ff0000",
+            "height":300,
+            "width":300,
+            "description": '寛げる老舗。ビール豆知識も学べる！<br><img src="./img/lacachette.jpg" width="240">',
+            "show":false
+        };
+        options[10]={
+            "lat":35.68098425020311,
+            "lon":139.7682482553048,
+            "title":"常陸野ブルーイング Tokyo Station",
+            // "pinColor":"#ff0000",
+            "height":300,
+            "width":320,
+            "description": '八重洲の街を一望！1h飲み放題がお得♩<br><img src="./img/hitachino.jpg" width="240">',
+            "show":false
+        };
+        options[11]={
+            "lat":35.69530577134497,
+            "lon":139.79268336877,
+            "title":"麦酒倶楽部 ポパイ",
+            // "pinColor":"#ff0000",
+            "height":300,
+            "width":320,
+            "description": '国産ビールが数多く揃う名店。<br><img src="./img/popye.jpg" width="240">',
+            "show":false
+        };
+        options[12]={
+            "lat":35.670408847145254,
+            "lon":139.7656678839871,
+            "title":"デリリウムカフェ銀座",
+            // "pinColor":"#ff0000",
+            "height":300,
+            "width":320,
+            "description": 'ベルギービールの聖地！<br>高アルコールの品が充実。<br><img src="./img/derilium.jpg" width="240">',
+            "show":false
+        };
+        // const database = firebase.database();
+        // var user = firebase.auth().currentUser;
+        // database.ref(options).set(options);
+
+function GetMap(){
+    //------------------------------------------------------------------------
+    //1. Instance
+    //------------------------------------------------------------------------
+    const map = new Bmap("#myMap");
+
+    //------------------------------------------------------------------------
+    //2. Display Map
+    //------------------------------------------------------------------------
+    map.startMap(35.67916260021399, 139.7631395551311, "load", 12.5); //The place is Bellevue.
+
+   //----------------------------------------------------
+        //3. Infobox
+        //   options = new Array();
+        //   options[index] = { lat, lon, width, height, title, pinColor, description, show };
+        //----------------------------------------------------
+ //----------------------------------------------------
+        //4. Switch infoboxs
+        //   infoboxLayers(options, true); //true=one, false=Multiple
+        //----------------------------------------------------
+        map.infoboxLayers(options,true);
+    }
+
+    $("#enter").on("click",function(){
+        const map = new Bmap("#myMap");
+        map.startMap(35.67916260021399, 139.7631395551311, "load", 12.5);
+        const name = $("#name").val();
+        const rate = $("#rate").val();
+        const memo = $("#memo").val();
+        const pic = $("#pic").val();
+        const address = $("#address").val();
+        // name.value = "";
+        // rate.value = "";
+        // memo.value = "";
+        // lat.value = "";
+        // lon.value = "";
+        // pic.value = "";
+        // console.log(name);
+        // console.log(rate);
+        // console.log(memo);
+        // console.log(pic);
+        map.getGeocode(address, function(data){
+        // console.log(data);          //Get Geocode ObjectData
+        const lat = data.latitude;  //Get latitude
+        const lon = data.longitude; //Get longitude
+        // document.querySelector("#geocode").innerHTML=lat+','+lon;
+        // map.pin(lat,lon,rate);
+        // map.infobox(lat, lon, name, memo);//3. Add Infobox(lat, lon, "title", "description");
+        // function addOption(){
+        //     // let i=0; i++;
+            const addOption={
+            "lat" : lat,
+            "lon" : lon,
+            "title" : name,
+            "pincolor" : rate,
+            "height" : 300,
+            "width" : "fit-content",
+            "description" : memo+'<br><img src="'+pic+'" width="240">',
+            "show" : false
+        }
+        options.push(addOption);
+        // console.log(lat);
+        // console.log(lon);
+        map.infoboxLayers(options,true);
+    });
+});
+
+// options.on("child_added", function (data) {
+//   const v = data.val();
+//   const k = data.key; //今回は使わないが、keyは削除などに使用
+  
+//     const h =  '<div><img src="imgs/'+img[v.icon]+'" width="45"><div class="chatBalloon">'+v.text+'</div><p class="vdate">'+v.date+'</p></div>'; //htmlを文字で先に作る
+//     $("#output").append(h);
+   
+  
+ 
+// });
+
+</script>
+
+
+<script>
+//****************************************************************************************
+// BingMaps&BmapQuery
+//****************************************************************************************
+//Init
+
+
+// 職場 35.67916260021399, 139.7631395551311
+// ベルオーブ豊洲 35.65546478467251, 139.79263449745912
+// Ibrew銀座 35.675801702849185, 139.76736848213727
+// デリリウムカフェ銀座 35.670408847145254, 139.7656678839871
+// 日本橋ブルワリー 35.68993212894646, 139.78261354165898
+
+</script>
+
+</body>
+</html>

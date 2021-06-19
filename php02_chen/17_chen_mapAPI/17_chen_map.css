@@ -1,0 +1,50 @@
+@charset "utf-8";
+
+body{
+    background-image: url(./img/bg.png);
+    background-size: cover;
+}
+.title{
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: goldenrod 3px 3px 3px;
+    margin: 20px auto;
+}
+
+input,
+textarea{
+    height: 16px;
+    border: none;
+    box-shadow: goldenrod 5px 5px 5px;
+}
+button{
+    margin-left: 8px;
+    border: none;
+    box-shadow: goldenrod 5px 5px 5px;
+}
+
+p{
+    padding-left: 8px;
+    padding-right: 3px;
+    color: #fff;
+    text-shadow: goldenrod 3px 3px 3px;
+}
+
+#myMap{
+    display: flex;
+    justify-content: center;
+    margin-left: 12%;
+    margin-top: 20px;
+    box-shadow: goldenrod 5px 5px 5px;
+}
+
+
+.optionMemo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: -15px auto;
+}
